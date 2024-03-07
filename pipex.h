@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:23:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/02/24 01:48:44 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:02:40 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,41 @@
 
 typedef struct s_pipex
 {
-	int ofile;
-	int ifile;
-	int index_cmd;
-	int pipe_number;
-	char *true_path;
+	int		ofile;
+	int		ifile;
+	int		index_cmd;
+	int		command_number;
+	int		*pipe;
+	pid_t	pid;
+	int		pipe_number;
+	char	*true_path;
+	int		heredoc;
 }	t_pipex;
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10000
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strchr(char *s, int c);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+
+int	ft_strncmp( char *s1, char *s2, size_t n);
+void heredoc(t_pipex *data, char *delemiter);
+
+void	init_struct(t_pipex *data, char **av, int ac);
+void free_struct(t_pipex *data);
+void create_pipes(t_pipex *data);
+void ft_close_pipes(t_pipex *data);
 
 void	err(void);
 void	ft_close(int file);
 size_t	ft_strlen(const char *c);
 void	ft_dup2(int file, int fd);
+void 	ft_dup2_bonus(int file0, int file1);
 char	*ft_strdup(const char *s1);
 char	*get_path(char *cmd, char **envp);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char  *s, char c);
 void	ft_putstr_fd(const char *s, int fd);
 void	ft_putendl_fd(const char *s, int fd);
 void	*ft_calloc( size_t count, size_t size);

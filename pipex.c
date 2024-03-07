@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/02/24 01:25:19 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:00:40 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 	char	*path;
 
 	path = get_path(cmd1, envp);
-	if(!path)
+	if (!path)
 		exit(COMMAND_NOT_FOUND_ERROR);
 	ifile = open(infile, O_RDONLY);
 	if (ifile == -1)
@@ -37,7 +37,7 @@ static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
 	char	*path;
 
 	path = get_path(cmd2, envp);
-	if(!path)
+	if (!path)
 		exit(COMMAND_NOT_FOUND_ERROR);
 	ofile = open(outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (!ofile)
@@ -49,10 +49,11 @@ static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
 	ft_close(fd[0]);
 	execve(path, ft_split(cmd2, ' '), envp);
 }
+
 void	at_exit(int *fd, pid_t fchild, pid_t schild)
 {
-	int	 exit_status;
-	
+	int		exit_status;
+
 	exit_status = 0;
 	ft_close (fd[0]);
 	ft_close(fd[1]);
@@ -66,9 +67,9 @@ int	main(int ac, char **av, char **envp)
 	int		fd[2];
 	pid_t	child1;
 	pid_t	child2;
-	
+
 	if (ac != 5)
-		printf("here\n"), fatal(BAD_ARG, EX_ARG);
+		fatal(BAD_ARG, EX_ARG);
 	if (pipe(fd) < 0)
 		err();
 	child1 = fork();

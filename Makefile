@@ -4,22 +4,28 @@ SRCS		=	pipex.c\
 				errors.c\
 				parsing.c\
 				ft_split.c\
-				pipex_utils.c\
-				pipex_utils2.c\
+				syscalls.c\
+				pipex_helpers.c\
+				pipex_helpers2.c\
+				get_next_line_utils.c\
 
 BNS_SRCS	=	errors.c\
 				parsing.c\
 				ft_split.c\
+				syscalls.c\
 				pipex_bonus.c\
-				pipex_utils.c\
-				pipex_utils2.c\
+				pipex_helpers.c\
+				bonus_helpers.c\
+				get_next_line.c\
+				pipex_helpers2.c\
+				get_next_line_utils.c\
 			  
 
-# OBJS		= $(SRCS:%.c=%.o)
+OBJS		= $(SRCS:%.c=%.o)
 
 BNS_OBJS	= $(BNS_SRCS:%.c=%.o)
 
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra 
 
 all: $(NAME)
 

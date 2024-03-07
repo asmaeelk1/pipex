@@ -6,17 +6,17 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/02/20 19:11:00 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:48:48 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *join_path(char **paths, char *cmd)
+char	*join_path(char **paths, char *cmd)
 {
-	char *part_path;
-	char *path;
-	int i;
+	char	*part_path;
+	char	*path;
+	int		i;
 
 	i = -1;
 	part_path = NULL;
@@ -33,9 +33,9 @@ char *join_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-void ft_free(char **str)
+void	ft_free(char **str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -43,18 +43,18 @@ void ft_free(char **str)
 	free(str);
 }
 
-char *get_path(char *cmd, char **envp)
+char	*get_path(char *cmd, char **envp)
 {
-	char **paths;
-	char *path;
-	int i;
+	char	**paths;
+	char	*path;
+	int		i;
 	char	**command;
+	char	**command_args;
 
 	i = 0;
-	path = NULL;
 	if (cmd[0] == '/' || cmd[0] == '.')
 	{
-		char **command_args = ft_split(cmd, ' ');
+		command_args = ft_split(cmd, ' ');
 		if (access(command_args[0], X_OK) == 0)
 		{
 			path = ft_strdup(command_args[0]);

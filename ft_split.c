@@ -6,34 +6,13 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:34 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/02/19 16:58:31 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:45:56 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	char	*res;
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		start = ft_strlen(s);
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	res = malloc(len +1);
-	if (!res)
-		return (NULL);
-	while (s[start] && i < len)
-		res[i++] = s[start++];
-	res[i] = '\0';
-	return (res);
-}
-
-static int	countwords(const char *str, char c)
+static int	countwords(char *str, char c)
 {
 	int	i;
 	int	count;
@@ -63,7 +42,7 @@ static void	ft_free(char **str, int c)
 	free(str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	int			i;
 	int			l;
