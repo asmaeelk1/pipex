@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 02:23:04 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 08:32:56 by asel-kha         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -33,6 +22,7 @@ char	*read_line(int fd, char *save)
 {
 	char	*buff;
 	int		readret;
+	char	*tmp;
 
 	save = calloc(1, 1);
 	buff = malloc((size_t)BUFFER_SIZE + 1);
@@ -46,11 +36,16 @@ char	*read_line(int fd, char *save)
 		if (readret == -1)
 			return (free(buff), free(save), NULL);
 		buff[readret] = '\0';
-		save = ft_strjoin(save, buff);
-		if (!*save && !save)
+		tmp = ft_strjoin(save, buff);
+		if (!tmp)
 			return (free(buff), free(save), NULL);
+		free(save);
+		save = tmp;
 	}
-	return (free(buff), save);
+	free(buff);
+	if (readret == 0 && save[0] == '\0')
+		return (free(save), NULL);
+	return (save);
 }
 
 char	*get_next_line(int fd)

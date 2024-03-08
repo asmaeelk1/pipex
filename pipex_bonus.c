@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 01:50:25 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 21:10:40 by asel-kha         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -22,9 +11,8 @@ void	heredoc(t_pipex *data, char *delemiter)
 		err();
 	while (1)
 	{
-		write(1, ">>", 2);
+		write(1, ">> ", 2);
 		tmp = get_next_line(0);
-		printf("%s\n", tmp);
 		if (!tmp || ((ft_strncmp(tmp, delemiter, ft_strlen(delemiter)) == 0)
 				&& (ft_strlen(tmp) - 1 == ft_strlen(delemiter))))
 			break ;
@@ -35,11 +23,10 @@ void	heredoc(t_pipex *data, char *delemiter)
 		free(delemiter);
 	free(tmp);
 	ft_close(fd);
-	if ((data->ifile = open("heredoc", O_RDONLY, 0644)) < 0)
-	{
-		unlink("heredoc");
+	data->ifile = open("heredoc", O_RDONLY, 0644);
+	unlink("heredoc");
+	if (data->ifile < 0)
 		err();
-	}
 }
 
 void	child(t_pipex data, char **av, char **envp)
@@ -84,6 +71,8 @@ int	main(int ac, char **av, char **envp)
 	while (++data.index_cmd < data.command_number)
 		child(data, av, envp);
 	ft_close_pipes(&data);
+	ft_close(data.ifile);
+	ft_close(data.ofile);
 	while (waitpid(data.pid, &state, 0) != -1)
 		;
 	exit(WEXITSTATUS(state));
