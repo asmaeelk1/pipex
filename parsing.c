@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 09:48:48 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:14:08 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*join_path(char **paths, char *cmd)
 	int		i;
 
 	i = -1;
-	part_path = NULL;
-	path = NULL;
 	while (paths[++i])
 	{
 		part_path = ft_strjoin(paths[i], "/");

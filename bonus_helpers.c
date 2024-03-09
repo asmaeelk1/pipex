@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bonus_helpers.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 18:32:02 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/03/09 21:31:11 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -5,14 +16,16 @@ void	init_struct(t_pipex *data, char **av, int ac)
 {
 	if (data->heredoc == 1)
 		heredoc(data, av[2]);
-	else
-		data->ifile = open(av[1], O_RDONLY, 0644);
+	// else
+	// 	data->ifile = open(av[1], O_RDONLY, 0644);
 	if (data->heredoc == 1)
 		data->ofile = open(av[ac - 1], O_CREAT | O_APPEND | O_RDWR, 0644);
 	else
 		data->ofile = open(av[ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if (data->ifile < 0 || data->ofile < 0)
+	if ( data->ofile < 0)
 		err();
+	data->infile = av[1];
+	data->outfile = av[ac -1];
 }
 
 void	free_struct(t_pipex *data)

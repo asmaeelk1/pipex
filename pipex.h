@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:23:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 10:02:40 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:29:12 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include <string.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <sys/errno.h>
 
 # define COMMAND_NOT_FOUND_ERROR 127
-# define BAD_ARG "Error: Bad arguments\n"
-# define EX_ARG  "Ex: ./pipex <file1> <cmd1> <cmd2> <file2>"
-# define EX_ARG_BONUS  "Ex: ./pipex <file1> <cmd1> <cmd2> ... <cmdn> <file2>"
+# define BAD_ARG "\033[31mError: Bad arguments\n"
+# define EX_ARG  "\033[37mEx: ./pipex <file1> <cmd1> <cmd2> <file2>"
+# define EX_ARG_BONUS  "\033[37mEx: ./pipex <file1><cmd1><cmd2>...<cmdn><file2>"
 
 typedef struct s_pipex
 {
@@ -36,6 +37,8 @@ typedef struct s_pipex
 	int		pipe_number;
 	char	*true_path;
 	int		heredoc;
+	char	*infile;
+	char	*outfile;
 }	t_pipex;
 
 # ifndef BUFFER_SIZE

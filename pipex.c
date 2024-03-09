@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 10:00:40 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:11:18 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
 		exit(COMMAND_NOT_FOUND_ERROR);
 	ofile = open(outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (!ofile)
-		err();
+		fatal("open: ", strerror(errno));
 	ft_close(fd[1]);
 	ft_dup2(ofile, 1);
 	ft_dup2(fd[0], 0);

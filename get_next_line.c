@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 18:32:40 by asel-kha          #+#    #+#             */
+/*   Updated: 2024/03/08 18:34:26 by asel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
@@ -42,10 +53,9 @@ char	*read_line(int fd, char *save)
 		free(save);
 		save = tmp;
 	}
-	free(buff);
 	if (readret == 0 && save[0] == '\0')
-		return (free(save), NULL);
-	return (save);
+		return (free(buff), free(save), NULL);
+	return (free(buff), save);
 }
 
 char	*get_next_line(int fd)
