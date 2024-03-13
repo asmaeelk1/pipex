@@ -25,7 +25,7 @@ OBJS		= $(SRCS:%.c=%.o)
 
 BNS_OBJS	= $(BNS_SRCS:%.c=%.o)
 
-FLAGS		= -Wall -Werror -Wextra 
+FLAGS		= -Wall -Wextra -g
 
 all: $(NAME)
 

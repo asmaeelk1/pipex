@@ -6,13 +6,13 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/09 19:11:18 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/13 04:17:03 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	childone(char *infile, char *cmd1, int fd[2], char **envp)
+void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 {
 	int		ifile;
 	char	*path;
