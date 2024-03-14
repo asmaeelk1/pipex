@@ -40,7 +40,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		start = ft_strlen(s);
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	res = malloc(len +1);
+	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
 	while (s[start] && i < len)

@@ -1,4 +1,5 @@
 NAME		=	pipex
+NAME_BNS	=	pipex_bonus
 
 SRCS		=	pipex.c\
 				errors.c\
@@ -13,6 +14,8 @@ BNS_SRCS	=	errors.c\
 				parsing.c\
 				ft_split.c\
 				syscalls.c\
+				heredoc_utils.c\
+				heredoc.c\
 				pipex_bonus.c\
 				pipex_helpers.c\
 				bonus_helpers.c\
@@ -32,19 +35,19 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	cc $(OBJS) -o $(NAME)
 
+bonus: $(NAME_BNS)
+
+$(NAME_BNS): $(BNS_OBJS)
+	 cc $(FLAGS) $(BNS_OBJS) -o $(NAME_BNS)
+
 %.o : %.c pipex.h
 	cc $(FLAGS) -c $<
-	
+
 clean:
 	rm -f $(OBJS) $(BNS_OBJS)
 	
-
-bonus:$(BNS_OBJS)
-	 cc $(FLAGS) $(BNS_OBJS) -o $(NAME)
-
-
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BNS)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:42:58 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/08 18:33:00 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/14 03:52:16 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_dup2(int file, int fd)
 		exit(EXIT_FAILURE);
 	}
 }
-void ft_dup2_bonus(int file0, int file1)
+
+void	ft_dup2_bonus(int file0, int file1)
 {
 	if (dup2(file0, 0) < 0)
 	{

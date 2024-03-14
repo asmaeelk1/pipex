@@ -52,10 +52,10 @@ static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
 
 void	at_exit(int *fd, pid_t fchild, pid_t schild)
 {
-	int		exit_status;
+	int	exit_status;
 
 	exit_status = 0;
-	ft_close (fd[0]);
+	ft_close(fd[0]);
 	ft_close(fd[1]);
 	waitpid(fchild, &exit_status, 0);
 	waitpid(schild, &exit_status, 0);
