@@ -8,7 +8,7 @@ SRCS		=	pipex.c\
 				syscalls.c\
 				pipex_helpers.c\
 				pipex_helpers2.c\
-				get_next_line_utils.c\
+				get_next_line_utils.c
 
 BNS_SRCS	=	errors.c\
 				parsing.c\
@@ -19,9 +19,10 @@ BNS_SRCS	=	errors.c\
 				pipex_bonus.c\
 				pipex_helpers.c\
 				bonus_helpers.c\
+				bonus_helpers2.c\
 				get_next_line.c\
 				pipex_helpers2.c\
-				get_next_line_utils.c\
+				get_next_line_utils.c
 			  
 
 OBJS		= $(SRCS:%.c=%.o)

@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/14 03:17:24 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/15 01:47:19 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 void	init_struct(t_pipex *data, char **av, int ac)
 {
+	int	i;
+
 	data->infile = av[1];
 	data->outfile = av[ac - 1];
 	data->index_cmd = -1;
 	data->command_number = ac - 3;
 	data->pipe_number = 2 * (data->command_number - 1);
 	data->pipe = malloc(sizeof(int) * data->pipe_number);
-	int	i;
-
 	i = -1;
 	while (++i < data->command_number - 1)
 		if (pipe(data->pipe + 2 * i) == -1)
 			free_struct(data);
-	// create_pipes(data);
 }
 
 void	*ft_memset(void *b, int c, size_t len)
@@ -47,16 +46,6 @@ void	*ft_memset(void *b, int c, size_t len)
 void	free_struct(t_pipex *data)
 {
 	free(data->pipe);
-}
-
-void	create_pipes(t_pipex *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->command_number - 1)
-		if (pipe(data->pipe + 2 * i) == -1)
-			free_struct(data);
 }
 
 void	ft_close_pipes(t_pipex *data)

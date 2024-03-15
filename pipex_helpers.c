@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:37:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/14 02:10:28 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:44:20 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	rtn[e] = '\0';
 	return (rtn);
 }
-
 
 void	*ft_calloc(size_t count, size_t size)
 {
