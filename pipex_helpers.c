@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:37:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/02/20 15:49:35 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:44:20 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	rtn = malloc(ft_strlen(s1)+ft_strlen(s2)+e * sizeof(char));
+	rtn = malloc(ft_strlen(s1) + ft_strlen(s2) + e * sizeof(char));
 	if (!rtn)
 		return (NULL);
 	while (s1[i])
@@ -34,13 +34,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (rtn);
 }
 
-void	*ft_calloc( size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*tmp;
 	size_t			i;
 
 	i = 0;
-	if ((int) size < 0 || (int)count < 0)
+	if ((int)size < 0 || (int)count < 0)
 		return (NULL);
 	tmp = malloc(count * size);
 	if (!tmp)
@@ -70,7 +70,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	char	*str;
 	char	*tofind;
 
-	str = (char *) haystack;
+	str = (char *)haystack;
 	tofind = (char *)needle;
 	i = 0;
 	if (needle[0] == '\0')
@@ -99,6 +99,6 @@ char	*ft_strdup(const char *s1)
 	ptr = malloc(ft_strlen(s1) + 1);
 	if (!ptr)
 		return (NULL);
-	ft_strlcpy(ptr, s1, ft_strlen(s1)+1);
+	ft_strlcpy(ptr, s1, ft_strlen(s1) + 1);
 	return (ptr);
 }

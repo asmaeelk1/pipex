@@ -6,29 +6,33 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/09 19:11:18 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/15 02:39:40 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <string.h>
 
-static void	childone(char *infile, char *cmd1, int fd[2], char **envp)
+void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 {
 	int		ifile;
 	char	*path;
 
-	path = get_path(cmd1, envp);
-	if (!path)
-		exit(COMMAND_NOT_FOUND_ERROR);
 	ifile = open(infile, O_RDONLY);
 	if (ifile == -1)
 		fatal(infile, "No such file or directory");
+	path = get_path(cmd1, envp);
+	if (!path)
+	{
+		fatal("bash: command not found", cmd1);
+	}
 	ft_close(fd[0]);
 	ft_dup2(ifile, 0);
 	ft_dup2(fd[1], 1);
 	ft_close(ifile);
 	ft_close(fd[1]);
-	execve(path, ft_split(cmd1, ' '), envp);
+	if (execve(path, ft_split(cmd1, ' '), envp))
+		fatal("Execve:", strerror(errno));
 }
 
 static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
@@ -36,26 +40,27 @@ static void	childtwo(char *outfile, char *cmd2, int fd[2], char **envp)
 	int		ofile;
 	char	*path;
 
-	path = get_path(cmd2, envp);
-	if (!path)
-		exit(COMMAND_NOT_FOUND_ERROR);
 	ofile = open(outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (!ofile)
 		fatal("open: ", strerror(errno));
+	path = get_path(cmd2, envp);
+	if (!path)
+		fatal("bash: command not found", cmd2);
 	ft_close(fd[1]);
 	ft_dup2(ofile, 1);
 	ft_dup2(fd[0], 0);
 	ft_close(ofile);
 	ft_close(fd[0]);
-	execve(path, ft_split(cmd2, ' '), envp);
+	if (execve(path, ft_split(cmd2, ' '), envp) == -1)
+		fatal("Execve:", strerror(errno));
 }
 
 void	at_exit(int *fd, pid_t fchild, pid_t schild)
 {
-	int		exit_status;
+	int	exit_status;
 
 	exit_status = 0;
-	ft_close (fd[0]);
+	ft_close(fd[0]);
 	ft_close(fd[1]);
 	waitpid(fchild, &exit_status, 0);
 	waitpid(schild, &exit_status, 0);

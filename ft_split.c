@@ -44,11 +44,11 @@ static void	ft_free(char **str, int c)
 
 char	**ft_split(char *s, char c)
 {
-	int			i;
-	int			l;
-	int			r;
-	int			e;
-	char		**res;
+	int		i;
+	int		l;
+	int		r;
+	int		e;
+	char	**res;
 
 	i = 0;
 	e = 0;
@@ -63,7 +63,7 @@ char	**ft_split(char *s, char c)
 			i++;
 		l = i;
 		while (s[i] && s[i] != c)
-			r = ++i ;
+			r = ++i;
 		res[e] = ft_substr(s, l, r - l);
 		if (!res[e++])
 			return (ft_free(res, e), NULL);
