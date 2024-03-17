@@ -23,13 +23,13 @@ BNS_SRCS	=	errors.c\
 				get_next_line.c\
 				pipex_helpers2.c\
 				get_next_line_utils.c
-			  
+
 
 OBJS		= $(SRCS:%.c=%.o)
 
 BNS_OBJS	= $(BNS_SRCS:%.c=%.o)
 
-FLAGS		= -Wall -Wextra -g
+FLAGS		= -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJS)
 bonus: $(NAME_BNS)
 
 $(NAME_BNS): $(BNS_OBJS)
-	 cc $(FLAGS) $(BNS_OBJS) -o $(NAME_BNS)
+	cc $(FLAGS) $(BNS_OBJS) -o $(NAME_BNS)
 
 %.o : %.c pipex.h
 	cc $(FLAGS) -c $<

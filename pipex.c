@@ -6,12 +6,12 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 02:39:40 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:22:22 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <string.h>
+#include <sys/wait.h>
 
 void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 {
@@ -23,9 +23,7 @@ void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 		fatal(infile, "No such file or directory");
 	path = get_path(cmd1, envp);
 	if (!path)
-	{
 		fatal("bash: command not found", cmd1);
-	}
 	ft_close(fd[0]);
 	ft_dup2(ifile, 0);
 	ft_dup2(fd[1], 1);

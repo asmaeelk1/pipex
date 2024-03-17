@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/08 20:14:08 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:54:21 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ char	*get_path(char *cmd, char **envp)
 	paths = ft_split(envp[i] + 5, ':');
 	path = join_path(paths, command[0]);
 	if (path)
-		return (ft_free(paths), path);
-	return (ft_free(paths), NULL);
+		return (ft_free(paths), ft_free(command), path);
+	return (ft_free(paths), ft_free(command), NULL);
 }

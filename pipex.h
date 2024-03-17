@@ -6,26 +6,25 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:23:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 02:27:19 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:42:17 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <libc.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <string.h>
 # include <sys/errno.h>
-// #include <stddef.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
 # define COMMAND_NOT_FOUND_ERROR 127
 # define BAD_ARG "\033[31mError: Bad arguments\n"
 # define EX_ARG "\033[37mEx: ./pipex <file1> <cmd1> <cmd2> <file2>"
-# define EX_ARG_BONUS "\033[37mEx: ./pipex <file1><cmd1><cmd2>...<cmdn><file2>"
+# define EX_ARG_BONUS "Ex: ./pipex_bonus  <file1><cmd1><cmd2>...<cmdn><file2>"
 
 typedef struct s_heredoc_data	t_heredoc_data;
 
