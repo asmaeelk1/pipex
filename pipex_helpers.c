@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:37:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 03:44:20 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:58:41 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
-	size_t	i;
-
-	i = 0;
 	ptr = malloc(ft_strlen(s1) + 1);
 	if (!ptr)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/08 18:34:26 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 07:21:51 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*read_line(int fd, char *save)
 	int		readret;
 	char	*tmp;
 
-	save = calloc(1, 1);
+	save = ft_calloc(1, 1);
 	buff = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buff || !save)
 		return (NULL);
