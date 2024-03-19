@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 03:44:10 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:07:43 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,18 @@ void	handle_last_command(t_pipex data, char *last_cmd, char **envp)
 	ft_close_pipes(&data);
 	if (execve(path, ft_split(last_cmd, ' '), envp) == -1)
 		fatal("Execve:", "falure");
+}
+
+void	ft_dup2_bonus(int file0, int file1)
+{
+	if (dup2(file0, 0) < 0)
+	{
+		perror("dup2");
+		exit(EXIT_FAILURE);
+	}
+	if (dup2(file1, 1) < 0)
+	{
+		perror("dup2");
+		exit(EXIT_FAILURE);
+	}
 }

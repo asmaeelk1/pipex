@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:23:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/17 22:42:17 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:08:11 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ typedef struct s_pipex
 
 // parsing.c
 char	*get_path(char *cmd, char **envp);
+
+//bonus_helpers2.c
 void	handle_first_command(t_pipex data, char *first_cmd, char **envp);
 void	handle_last_command(t_pipex data, char *last_cmd, char **envp);
+void	ft_dup2_bonus(int file0, int file1);
 
 // heredoc.c
 void	heredoc(t_heredoc_data heredoc_data,
@@ -100,7 +103,6 @@ char	*ft_substr(char *s, unsigned int start,
 
 // syscalls.c
 void	ft_dup2(int file, int fd);
-void	ft_dup2_bonus(int file0, int file1);
 void	ft_close(int file);
 
 // errors.c

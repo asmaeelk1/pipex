@@ -6,11 +6,13 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:48 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 03:04:54 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:05:09 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/fcntl.h>
+#include <unistd.h>
 
 void	init_heredoc_data(t_heredoc_data *heredoc_data, char *argv[],
 		char **envp)
@@ -25,14 +27,10 @@ void	init_heredoc_data(t_heredoc_data *heredoc_data, char *argv[],
 	heredoc_data->envp = envp;
 }
 
-static void	heredoc_exec(t_heredoc_data heredoc_data)
+static void	heredoc_exec(t_heredoc_data heredoc_data, int tempfile_fd)
 {
-	int		heredoc;
 	char	*tmp;
 
-	heredoc = open(heredoc_data.heredoc_file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (heredoc < 0)
-		err();
 	while (1)
 	{
 		write(1, ">> ", 3);
@@ -41,32 +39,32 @@ static void	heredoc_exec(t_heredoc_data heredoc_data)
 						ft_strlen(heredoc_data.delimiter)) == 0)
 				&& (ft_strlen(tmp) - 1 == ft_strlen(heredoc_data.delimiter))))
 			break ;
-		write(heredoc, tmp, ft_strlen(tmp));
+		write(tempfile_fd, tmp, ft_strlen(tmp));
 		free(tmp);
 	}
 	free(tmp);
-	ft_close(heredoc);
 }
 
 void	childone_heredoc(t_heredoc_data heredoc_data)
 {
-	int		ifile;
+	int		tempfile_fd;
 	char	*path;
 
-	ifile = open(heredoc_data.heredoc_file, O_RDONLY);
-	if (ifile == -1)
+	tempfile_fd = open(heredoc_data.heredoc_file, O_CREAT | O_RDWR | O_TRUNC,
+			0644);
+	if (tempfile_fd == -1)
 		fatal("open: ", strerror(errno));
 	path = get_path(heredoc_data.cmd1, heredoc_data.envp);
 	if (!path)
 		fatal("bash: command not found", heredoc_data.cmd1);
-	heredoc_exec(heredoc_data);
+	heredoc_exec(heredoc_data, tempfile_fd);
 	ft_close(heredoc_data.fds[0]);
-	ft_dup2(ifile, 0);
+	ft_dup2(tempfile_fd, 0);
 	ft_dup2(heredoc_data.fds[1], 1);
-	ft_close(ifile);
+	ft_close(tempfile_fd);
 	ft_close(heredoc_data.fds[1]);
-	if (execve(path, ft_split(heredoc_data.cmd1, ' '),
-			heredoc_data.envp) == -1)
+	unlink(heredoc_data.heredoc_file);
+	if (execve(path, ft_split(heredoc_data.cmd1, ' '), heredoc_data.envp) == -1)
 		fatal("Execve:", "falure");
 }
 
@@ -86,7 +84,6 @@ void	childtwo_heredoc(t_heredoc_data heredoc_data)
 	ft_dup2(heredoc_data.fds[0], 0);
 	ft_close(ofile);
 	ft_close(heredoc_data.fds[0]);
-	if (execve(path, ft_split(heredoc_data.cmd2, ' '),
-			heredoc_data.envp) == -1)
+	if (execve(path, ft_split(heredoc_data.cmd2, ' '), heredoc_data.envp) == -1)
 		fatal("Execve:", "falure");
 }
