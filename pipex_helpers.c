@@ -6,12 +6,11 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:37:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/19 08:06:46 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 00:49:52 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -94,6 +93,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
+
 	ptr = malloc(ft_strlen(s1) + 1);
 	if (!ptr)
 		return (NULL);

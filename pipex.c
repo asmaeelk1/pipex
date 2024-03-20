@@ -6,12 +6,11 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:41 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/17 22:22:22 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 02:05:11 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/wait.h>
 
 void	childone(char *infile, char *cmd1, int fd[2], char **envp)
 {
