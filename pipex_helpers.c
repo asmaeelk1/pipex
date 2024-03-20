@@ -6,11 +6,12 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:37:27 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/19 06:58:41 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/19 08:06:46 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdlib.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -44,7 +45,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	tmp = malloc(count * size);
 	if (!tmp)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	while (i < (count * size))
 	{
 		tmp[i] = 0;

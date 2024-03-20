@@ -6,13 +6,11 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:48 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/19 06:05:09 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 00:37:03 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/fcntl.h>
-#include <unistd.h>
 
 void	init_heredoc_data(t_heredoc_data *heredoc_data, char *argv[],
 		char **envp)
@@ -65,7 +63,7 @@ void	childone_heredoc(t_heredoc_data heredoc_data)
 	ft_close(heredoc_data.fds[1]);
 	unlink(heredoc_data.heredoc_file);
 	if (execve(path, ft_split(heredoc_data.cmd1, ' '), heredoc_data.envp) == -1)
-		fatal("Execve:", "falure");
+		fatal("Execve:", strerror(errno));
 }
 
 void	childtwo_heredoc(t_heredoc_data heredoc_data)
@@ -85,5 +83,5 @@ void	childtwo_heredoc(t_heredoc_data heredoc_data)
 	ft_close(ofile);
 	ft_close(heredoc_data.fds[0]);
 	if (execve(path, ft_split(heredoc_data.cmd2, ' '), heredoc_data.envp) == -1)
-		fatal("Execve:", "falure");
+		fatal("Execve:", strerror(errno));
 }

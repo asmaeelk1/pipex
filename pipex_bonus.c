@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:48 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 02:09:22 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 00:42:14 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int ac, char **av, char **envp)
 	ft_memset(&data, 0, sizeof(data));
 	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
 	{
+		if(ac != 5)
+		fatal(BAD_ARG, EX_ARG_HEREDOC);
 		heredoc(heredoc_data, av, envp);
 		return (0);
 	}
