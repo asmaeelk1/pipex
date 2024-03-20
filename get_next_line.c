@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:40 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/19 07:21:51 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:46:19 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ char	*get_next_line(int fd)
 	if (!save)
 		return (NULL);
 	str = split_nl(&save);
+	free(save);
 	return (str);
 }

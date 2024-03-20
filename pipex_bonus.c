@@ -6,11 +6,12 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:48 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/20 00:50:56 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:46:57 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdlib.h>
 
 void	child(t_pipex *data, char **av, int ac, char **envp)
 {

@@ -43,9 +43,10 @@ void	ft_free(char **str)
 
 char	*ft_getenv(char **envp, char *key)
 {
-	int index = 0;
-	size_t key_len;
+	int		index;
+	size_t	key_len;
 
+	index = 0;
 	key_len = strlen(key);
 	while (envp[index] && strncmp(envp[index], key, key_len) != 0)
 	{
@@ -53,15 +54,15 @@ char	*ft_getenv(char **envp, char *key)
 	}
 	if (envp[index] == NULL)
 	{
-		return NULL;
+		return (NULL);
 	}
-	return strdup(envp[index] + 5);
+	return (strdup(envp[index] + 5));
 }
 
 char	*relative_path(char *cmd)
 {
-	char **command_args;
-	char *path;
+	char	**command_args;
+	char	*path;
 
 	command_args = NULL;
 	path = NULL;
@@ -74,7 +75,6 @@ char	*relative_path(char *cmd)
 	return (ft_free(command_args), NULL);
 }
 
-
 char	*get_path(char *cmd, char **envp)
 {
 	char	**paths;
@@ -83,10 +83,10 @@ char	*get_path(char *cmd, char **envp)
 	char	*env_value;
 
 	if (cmd[0] == '/' || cmd[0] == '.')
-		return relative_path(cmd);
+		return (relative_path(cmd));
 	env_value = ft_getenv(envp, "PATH=");
 	if (env_value == NULL)
-		return NULL;
+		return (NULL);
 	command = ft_split(cmd, ' ');
 	paths = ft_split(env_value, ':');
 	free(env_value);
