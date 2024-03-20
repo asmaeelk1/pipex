@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/17 21:54:21 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/20 08:35:53 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,55 @@ void	ft_free(char **str)
 	free(str);
 }
 
+char	*ft_getenv(char **envp, char *key)
+{
+	int index = 0;
+	size_t key_len;
+
+	key_len = strlen(key);
+	while (envp[index] && strncmp(envp[index], key, key_len) != 0)
+	{
+		index++;
+	}
+	if (envp[index] == NULL)
+	{
+		return NULL;
+	}
+	return strdup(envp[index] + 5);
+}
+
+char	*relative_path(char *cmd)
+{
+	char **command_args;
+	char *path;
+
+	command_args = NULL;
+	path = NULL;
+	command_args = ft_split(cmd, ' ');
+	if (access(command_args[0], X_OK) == 0)
+	{
+		path = ft_strdup(command_args[0]);
+		return (ft_free(command_args), path);
+	}
+	return (ft_free(command_args), NULL);
+}
+
+
 char	*get_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*path;
-	int		i;
 	char	**command;
-	char	**command_args;
+	char	*env_value;
 
-	i = 0;
 	if (cmd[0] == '/' || cmd[0] == '.')
-	{
-		command_args = ft_split(cmd, ' ');
-		if (access(command_args[0], X_OK) == 0)
-		{
-			path = ft_strdup(command_args[0]);
-			return (ft_free(command_args), path);
-		}
-		return (ft_free(command_args), NULL);
-	}
-	while (ft_strnstr(envp[i], "PATH=", 5) == 0)
-		i++;
+		return relative_path(cmd);
+	env_value = ft_getenv(envp, "PATH=");
+	if (env_value == NULL)
+		return NULL;
 	command = ft_split(cmd, ' ');
-	paths = ft_split(envp[i] + 5, ':');
+	paths = ft_split(env_value, ':');
+	free(env_value);
 	path = join_path(paths, command[0]);
 	if (path)
 		return (ft_free(paths), ft_free(command), path);
