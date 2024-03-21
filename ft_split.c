@@ -6,13 +6,13 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:34 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/21 21:25:11 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:19:42 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// Function to count the number of words in a string delimited by 'c'
+// count the number of words
 static int	count_words(char *str, char c)
 {
 	int	i;
@@ -33,7 +33,7 @@ static int	count_words(char *str, char c)
 	return (count);
 }
 
-// Function to free memory allocated for the array of strings
+// free memory allocated
 static void	free_memory(char **str, int c)
 {
 	while (c >= 0)
@@ -44,7 +44,7 @@ static void	free_memory(char **str, int c)
 	free(str);
 }
 
-// Function to split a string 's' based on delimiter 'c'
+// split a string
 char	**ft_split(char *s, char c)
 {
 	int		i;

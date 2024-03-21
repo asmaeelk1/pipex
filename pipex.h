@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:23:18 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/20 02:02:19 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:13:37 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,9 @@ void	ft_dup2(int file, int fd);
 void	ft_close(int file);
 
 // errors.c
-void	err(void);
 void	fatal(const char *command, const char *msg);
 
 // ft_split.c
 char	**ft_split(char *s, char c);
-
-// void							child_processe(t_pipex *data, int fd[2],
-// 									char **av, char **envp);
 
 #endif

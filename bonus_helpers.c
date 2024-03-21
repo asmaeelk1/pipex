@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:32:02 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/15 01:47:19 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:59:11 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ void	init_struct(t_pipex *data, char **av, int ac)
 	data->pipe = malloc(sizeof(int) * data->pipe_number);
 	i = -1;
 	while (++i < data->command_number - 1)
+	{
 		if (pipe(data->pipe + 2 * i) == -1)
+		{
 			free_struct(data);
+			fatal("pipe", strerror(errno));
+		}
+	}
 }
 
 void	*ft_memset(void *b, int c, size_t len)

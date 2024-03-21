@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/20 00:48:30 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:16:33 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	handle_last_command(t_pipex data, char *last_cmd, char **envp)
 
 	path = get_path(last_cmd, envp);
 	if (!path)
-		err();
+		fatal(last_cmd, strerror(errno));
 	ofile = open(data.outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (!ofile)
 		fatal("open: ", strerror(errno));
