@@ -6,7 +6,7 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:46 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/20 08:35:53 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:38:57 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*ft_getenv(char **envp, char *key)
 	size_t	key_len;
 
 	index = 0;
-	key_len = strlen(key);
-	while (envp[index] && strncmp(envp[index], key, key_len) != 0)
+	key_len = ft_strlen(key);
+	while (envp[index] && ft_strncmp(envp[index], key, key_len) != 0)
 	{
 		index++;
 	}
@@ -56,7 +56,7 @@ char	*ft_getenv(char **envp, char *key)
 	{
 		return (NULL);
 	}
-	return (strdup(envp[index] + 5));
+	return (ft_strdup(envp[index] + 5));
 }
 
 char	*relative_path(char *cmd)
