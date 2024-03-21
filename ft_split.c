@@ -6,13 +6,14 @@
 /*   By: asel-kha <asel-kha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:20:34 by asel-kha          #+#    #+#             */
-/*   Updated: 2024/03/07 09:45:56 by asel-kha         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:25:11 by asel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	countwords(char *str, char c)
+// Function to count the number of words in a string delimited by 'c'
+static int	count_words(char *str, char c)
 {
 	int	i;
 	int	count;
@@ -32,7 +33,8 @@ static int	countwords(char *str, char c)
 	return (count);
 }
 
-static void	ft_free(char **str, int c)
+// Function to free memory allocated for the array of strings
+static void	free_memory(char **str, int c)
 {
 	while (c >= 0)
 	{
@@ -42,31 +44,32 @@ static void	ft_free(char **str, int c)
 	free(str);
 }
 
+// Function to split a string 's' based on delimiter 'c'
 char	**ft_split(char *s, char c)
 {
 	int		i;
-	int		l;
-	int		r;
-	int		e;
-	char	**res;
+	int		start;
+	int		end;
+	int		element;
+	char	**result;
 
 	i = 0;
-	e = 0;
+	element = 0;
 	if (!s)
 		return (NULL);
-	res = ft_calloc((countwords(s, c) + 1), sizeof(char *));
-	if (!res)
+	result = ft_calloc((count_words(s, c) + 1), sizeof(char *));
+	if (!result)
 		return (NULL);
-	while (s[i] && e < countwords((char *)s, c))
+	while (s[i] && element < count_words((char *)s, c))
 	{
 		while (s[i] && s[i] == c)
 			i++;
-		l = i;
+		start = i;
 		while (s[i] && s[i] != c)
-			r = ++i;
-		res[e] = ft_substr(s, l, r - l);
-		if (!res[e++])
-			return (ft_free(res, e), NULL);
+			end = ++i;
+		result[element] = ft_substr(s, start, end - start);
+		if (!result[element++])
+			return (free_memory(result, element), NULL);
 	}
-	return (res);
+	return (result);
 }
